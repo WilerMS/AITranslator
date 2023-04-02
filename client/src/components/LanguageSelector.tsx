@@ -14,7 +14,7 @@ interface Props {
 
 export const LanguageSelector: FC<Props> = ({ value, isFromLanguage = true, onChange }) => {
   // @ts-expect-error
-  const language = SUPORTED_LANGUAGES[value] ?? { name: 'Detect language' }
+  const language = SUPORTED_LANGUAGES[value] ?? { name: 'Auto' }
   const [isExpanded, setIsExpanded] = useState(false)
   const [isActive, setIsActive] = useState(false)
   const [inputText, setInputText] = useState('')
@@ -62,7 +62,7 @@ export const LanguageSelector: FC<Props> = ({ value, isFromLanguage = true, onCh
   return (
     <div ref={ref} className="relative w-full flex flex-col gap-2">
       <div
-        className='flex justify-between items-center bg-white p-3 rounded-md shadow cursor-pointer'
+        className='flex justify-between items-center bg-white p-3 rounded-md cursor-pointer'
         onClick={handleToggleSelect}
       >
         {isActive
@@ -97,7 +97,7 @@ export const LanguageSelector: FC<Props> = ({ value, isFromLanguage = true, onCh
             animate={{ y: 10, opacity: 1 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ ease: 'linear', duration: 0.1 }}
-            className='absolute overflow-hidden top-full w-full flex p-3 justify-between items-center bg-white py-3 rounded-md shadow cursor-pointer'
+            className='absolute overflow-hidden top-full min-w-full flex p-3 justify-between items-center bg-white py-3 rounded-lg shadow cursor-pointer'
           >
             <ul className='w-full max-h-96 overflow-y-auto'>
               {isFromLanguage && !inputText &&
@@ -107,7 +107,7 @@ export const LanguageSelector: FC<Props> = ({ value, isFromLanguage = true, onCh
                   className='w-full p-3 rounded-md transition hover:bg-gray-100'
                 >
                   <button className='flex gap-2 text-gray-800'>
-                    <span>Detect language</span>
+                    <span>Auto language</span>
                   </button>
                 </li>
               }

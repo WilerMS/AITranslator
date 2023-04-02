@@ -17,6 +17,16 @@ export const translatorReducer = (state: TranslatorState, action: TranslatorActi
     // Prevent interchange auto state
     if (state.fromLanguage === AUTO_LANGUAGE) return state
 
+    if (state.result !== '') {
+      return {
+        ...state,
+        fromText: state.result,
+        result: state.fromText,
+        fromLanguage: state.toLanguage,
+        toLanguage: state.fromLanguage
+      }
+    }
+
     return {
       ...state,
       fromLanguage: state.toLanguage,
@@ -25,6 +35,8 @@ export const translatorReducer = (state: TranslatorState, action: TranslatorActi
   }
 
   if (type === TranslatorActions.SET_FROM_LANGUAGE) {
+    if (state.fromLanguage === action.payload) return state
+
     return {
       ...state,
       fromLanguage: action.payload
@@ -32,6 +44,8 @@ export const translatorReducer = (state: TranslatorState, action: TranslatorActi
   }
 
   if (type === TranslatorActions.SET_TO_LANGUAGE) {
+    if (state.toLanguage === action.payload) return state
+
     return {
       ...state,
       toLanguage: action.payload

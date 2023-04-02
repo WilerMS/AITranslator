@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
-    'n/no-callback-literal': 'off'
+    'n/no-callback-literal': 'off',
+    'no-useless-return': 'off'
   }
 }
