@@ -7,9 +7,12 @@ import { useEffect } from 'react'
 import { useDebounce } from '@hooks/useDebounce'
 import { translate } from 'service/translator'
 import ActionButton from '@components/ActionButton'
-import { FiCopy } from 'react-icons/fi'
-import { HiOutlineHeart, HiOutlineVolumeUp, HiOutlineShare } from 'react-icons/hi'
+import { FiCamera, FiCopy } from 'react-icons/fi'
+import { HiOutlineHeart, HiOutlineVolumeUp, HiOutlineShare, HiOutlineCamera, HiCamera, HiMenuAlt2 } from 'react-icons/hi'
 import { CgTrashEmpty } from 'react-icons/cg'
+import { BiMicrophone } from 'react-icons/bi'
+import { useSpeechRecognition } from '@hooks/useSpeechRecognition'
+import Dictaphone from '@components/SpeechRecognition'
 
 export default function App () {
   const {
@@ -44,8 +47,19 @@ export default function App () {
       })
   }, [debouncedText, fromLanguage, toLanguage])
 
+  const {
+    transcription,
+    startRecognition,
+    stopRecognition
+    // @ts-expect-error
+  } = useSpeechRecognition({ lang: SUPORTED_LANGUAGES[fromLanguage]?.slang })
+
+  useEffect(() => {
+    setFromText(transcription)
+  }, [transcription])
+
   const handleCopyTranslation = () => {
-    navigator.clipboard.writeText(result).catch(() => {})
+    navigator.clipboard.writeText(result).catch(() => { })
   }
 
   const handleShareTranslation = () => {
@@ -55,6 +69,10 @@ export default function App () {
   }
 
   const handleTextToSpeech = () => {
+    const utterance = new SpeechSynthesisUtterance(result)
+    // @ts-expect-error
+    utterance.lang = SUPORTED_LANGUAGES[toLanguage].slang ?? 'es-ES'
+    speechSynthesis.speak(utterance)
   }
 
   const handleDeleteTranslation = () => {
@@ -63,7 +81,7 @@ export default function App () {
 
   return (
     <div className='App flex gap-2 justify-center items-center h-[100vh] bg-blue-300'>
-      <div className='flex gap-2 flex-col bg-gray-50 p-3 rounded-lg shadow-xl w-[400px]'>
+      <div className='flex gap-2 flex-col bg-gray-50 p-3 rounded-lg shadow-xl w-[400px] overflow-hidden'>
         <h1 className='text-3xl text-center font-bold p-3'>
           <span className='text-cyan-600'>AI</span>
           <span className='text-gray-900'>translator</span>
@@ -110,6 +128,20 @@ export default function App () {
               </ActionButton>
             </div>
           </div>
+        </div>
+        <div className='relative w-full h-32 rounded-lg flex items-center justify-center gap-5'>
+          <button className='text-cyan-600 bg-white rounded-full z-40 shadow-xl p-3 text-2xl transition hover:scale-105 active:scale-95'>
+            <HiMenuAlt2 />
+          </button>
+          <Dictaphone
+            onTouchStart={startRecognition}
+            onMouseDown={startRecognition}
+            onTouchEnd={stopRecognition}
+            onMouseUp={stopRecognition}
+          />
+          <button className='text-cyan-600 bg-white rounded-full z-40 shadow-xl p-3 text-2xl transition hover:scale-105 active:scale-95'>
+            <HiOutlineCamera />
+          </button>
         </div>
       </div>
     </div>

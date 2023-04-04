@@ -3,7 +3,7 @@ import { AUTO_LANGUAGE } from '@constants/suportedLanguages'
 import { type TranslatorState, type TranslatorAction } from './../types.d'
 
 export const initialTanslatorState: TranslatorState = {
-  fromLanguage: 'auto',
+  fromLanguage: 'es',
   toLanguage: 'en',
   fromText: '',
   result: '',
