@@ -11,7 +11,7 @@ const isSupportedSpeedRecognition = !!window.webkitSpeechRecognition
 const Dictaphone: FC<Props> = (props) => {
   return (
     <button
-      className='dictaphone bg-cyan-600 text-white select-none rounded-full z-50 shadow-xl p-5 text-4xl transition hover:scale-105 hover:shadow-2xl active:scale-95 disabled:bg-gray-300 disabled:hover:scale-100 disabled:hover:shadow-xl'
+      className='dictaphone selection:bg-transparent bg-cyan-600 text-white select-none rounded-full z-50 shadow-xl p-5 text-4xl transition hover:scale-105 hover:shadow-2xl active:scale-95 disabled:bg-gray-300 disabled:hover:scale-100 disabled:hover:shadow-xl'
       {...props}
       title={isSupportedSpeedRecognition ? '' : 'Speech recognition is not supported by this browser'}
       disabled={!isSupportedSpeedRecognition}

@@ -81,7 +81,8 @@ export default function App () {
 
   return (
     <div className='App flex gap-2 justify-center items-center h-[100vh] bg-blue-300'>
-      <div className='flex gap-2 flex-col bg-gray-50 p-3 rounded-lg shadow-xl w-[400px] overflow-hidden'>
+
+      <div className='flex gap-2 flex-col bg-gray-50 p-3 w-full h-full md:h-[unset] md:shadow-xl md:w-[400px] md:rounded-lg overflow-hidden'>
         <h1 className='text-3xl text-center font-bold p-3'>
           <span className='text-cyan-600'>AI</span>
           <span className='text-gray-900'>translator</span>
@@ -129,7 +130,7 @@ export default function App () {
             </div>
           </div>
         </div>
-        <div className='relative w-full h-32 rounded-lg flex items-center justify-center gap-5'>
+        <div className='relative w-full h-1/5 md:h-32 rounded-lg flex items-center justify-center gap-5'>
           <button className='text-cyan-600 bg-white rounded-full z-40 shadow-xl p-3 text-2xl transition hover:scale-105 active:scale-95'>
             <HiMenuAlt2 />
           </button>
