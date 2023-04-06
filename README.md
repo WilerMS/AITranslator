@@ -1,6 +1,11 @@
 <h1 align="center">AI Translator</h1>
 <p align="center">A simple web translator powered by chatgpt</p>
-<p align="center"><img height="400px" src="https://user-images.githubusercontent.com/70902862/229665512-d88882d3-e18b-4635-9cb8-30e0d72869bc.png"/></p>
+<p align="center">
+  <img height="300px" src="https://user-images.githubusercontent.com/70902862/230276406-5133c1b4-c9f8-4ef9-8944-e7e4824c4648.png"/>
+  <img height="300px" src="https://user-images.githubusercontent.com/70902862/230276156-0bb4151c-7a6f-482a-9376-9877600e26b1.png"/>
+
+
+</p>
 
 
 
