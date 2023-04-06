@@ -4,11 +4,14 @@ import { type SUPORTED_LANGUAGES, type AUTO_LANGUAGE } from '@constants/suported
 export type AutoLanguage = typeof AUTO_LANGUAGE
 export type Language = keyof typeof SUPORTED_LANGUAGES | typeof AUTO_LANGUAGE
 
-export interface TranslatorState {
+interface Translation {
   fromLanguage: Language
   toLanguage: Language
   fromText: string
   result: string
+}
+
+export interface TranslatorState extends Translation {
   loading: boolean
 }
 

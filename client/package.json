@@ -1,5 +1,6 @@
 {
   "name": "chatgpt-translator",
+  "homepage": "https://wilerms.github.io/chatgpt-translator",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +8,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "host": "vite --host 192.168.1.14"
+    "host": "vite --host 192.168.1.14",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
@@ -15,6 +18,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "vite-tsconfig-paths": "^4.0.7"
   },
   "devDependencies": {

@@ -60,9 +60,9 @@ export const LanguageSelector: FC<Props> = ({ value, isFromLanguage = true, onCh
     ))
 
   return (
-    <div ref={ref} className="relative w-full flex flex-col gap-2">
+    <div ref={ref} className="relative w-full h-full flex flex-col gap-2">
       <div
-        className='flex justify-between items-center bg-white p-3 rounded-md cursor-pointer'
+        className='flex justify-between items-center bg-white p-3 h-full rounded-md cursor-pointer'
         onClick={handleToggleSelect}
       >
         {isActive
