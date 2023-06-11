@@ -3,7 +3,7 @@ import { useTranslatorStore } from '@hooks/useTranslatorStore'
 import { LanguageSelector } from '@components/LanguageSelector'
 import { AUTO_LANGUAGE, SUPORTED_LANGUAGES } from '@constants/suportedLanguages'
 import { Textarea } from '@components/Textarea'
-import { useEffect } from 'react'
+import { useEffect, useId } from 'react'
 import { useDebounce } from '@hooks/useDebounce'
 import { translate } from 'service/translator'
 import ActionButton from '@components/ActionButton'
@@ -67,7 +67,7 @@ export default function App () {
   }
 
   const handleMarkFavTranslation = () => {
-    setFavTranslations([{ result, fromText, fromLanguage, toLanguage }, ...favTranslations])
+    setFavTranslations([{ id: `${Date.now()}`, result, fromText, fromLanguage, toLanguage }, ...favTranslations])
   }
 
   const handleTextToSpeech = () => {

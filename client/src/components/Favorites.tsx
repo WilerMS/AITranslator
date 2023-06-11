@@ -1,7 +1,9 @@
 import { SUPORTED_LANGUAGES } from '@constants/suportedLanguages'
 import { useDebounce } from '@hooks/useDebounce'
+import { useTranslatorContext } from 'context/translator'
 import React, { useEffect, useMemo, useState, type FC } from 'react'
-import { FaHeart, FaSearch, FaTimes } from 'react-icons/fa'
+import { CgTrashEmpty } from 'react-icons/cg'
+import { FaHeart, FaSearch, FaTimes, FaTrash } from 'react-icons/fa'
 import { type Translation } from 'types'
 import { intersection } from 'utils'
 import Logo from './Logo'
@@ -54,11 +56,10 @@ const Favorites: FC<FavoritesProps> = ({ translations }) => {
 
   const intersectedTranslations = useMemo(() => {
     if (searchedText) {
-      const matches = intersection(searchedText, translations)
-      return matches
+      return intersection(searchedText, translations)
     }
     return translations
-  }, [searchedText])
+  }, [searchedText, translations])
 
   return (
     <div className='hidden relative md:max-w-[400px] md:min-w-[400px] md:flex flex-col p-3 gap-3'>
@@ -79,9 +80,15 @@ const Favorites: FC<FavoritesProps> = ({ translations }) => {
   )
 }
 
-export const FavoriteItem: FC<Translation> = ({ fromLanguage, fromText, result, toLanguage }) => {
+export const FavoriteItem: FC<Translation> = ({ id, fromLanguage, fromText, result, toLanguage }) => {
+  const { deleteFavTranslation } = useTranslatorContext()
+
+  const handleDeleteFavoriteTranslation = () => {
+    deleteFavTranslation(id)
+  }
+
   return (
-    <div className=' w-full border border-gray-100 rounded-lg'>
+    <div className='relative w-full border border-gray-100 rounded-lg'>
       <div className='p-3 border-b border-gray-100'>
         <h3 className='text-xl font-semibold'>{SUPORTED_LANGUAGES[fromLanguage].flag} {SUPORTED_LANGUAGES[fromLanguage].name}</h3>
         <span className='block mt-1 text-gray-600 overflow-hidden truncate text-ellipsis'>{fromText}</span>
@@ -90,6 +97,13 @@ export const FavoriteItem: FC<Translation> = ({ fromLanguage, fromText, result, 
         <h3 className='text-xl font-semibold'>{SUPORTED_LANGUAGES[toLanguage].flag} {SUPORTED_LANGUAGES[toLanguage].name}</h3>
         <span className='block mt-1 text-gray-600 overflow-hidden truncate text-ellipsis'>{result}</span>
       </div>
+
+      <button
+        onClick={handleDeleteFavoriteTranslation}
+        className='absolute top-[10px] right-[10px] text-2xl'
+      >
+        <CgTrashEmpty />
+      </button>
     </div>
   )
 }

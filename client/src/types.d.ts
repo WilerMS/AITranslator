@@ -5,6 +5,7 @@ export type AutoLanguage = typeof AUTO_LANGUAGE
 export type Language = keyof typeof SUPORTED_LANGUAGES | typeof AUTO_LANGUAGE
 
 interface Translation {
+  id: string
   fromLanguage: Language
   toLanguage: Language
   fromText: string

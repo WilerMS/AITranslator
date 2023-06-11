@@ -5,6 +5,7 @@ import { type Translation } from 'types'
 interface TranslatorContextType {
   favTranslations: Translation[]
   setFavTranslations: React.Dispatch<Translation[]>
+  deleteFavTranslation: (id: string) => void
 }
 
 interface TranslatorContextProviderType {
@@ -13,7 +14,8 @@ interface TranslatorContextProviderType {
 
 const TranslatorContext = createContext<TranslatorContextType>({
   favTranslations: [],
-  setFavTranslations: (value) => { }
+  setFavTranslations: (value) => { },
+  deleteFavTranslation: (id) => {}
 })
 
 export const TranslatorContextProvider: FC<TranslatorContextProviderType> = ({
@@ -21,11 +23,17 @@ export const TranslatorContextProvider: FC<TranslatorContextProviderType> = ({
 }) => {
   const [favTranslations, setFavTranslations] = useLocalStorage<Translation[]>('favTranslations', [])
 
+  const deleteFavTranslation = (id: string) => {
+    const newFavTranslations = favTranslations.filter(translation => translation.id !== id)
+    setFavTranslations(newFavTranslations)
+  }
+
   return (
     <TranslatorContext.Provider
       value={{
         favTranslations,
-        setFavTranslations
+        setFavTranslations,
+        deleteFavTranslation
       }}
     >
       {children}
