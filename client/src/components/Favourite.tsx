@@ -12,7 +12,7 @@ const Favourite: FC<Props> = ({ text }) => {
 
   return (
     <button
-      className={`${text ? 'text-gray-800 hover:text-gray-900 cursor-pointer' : 'text-gray-400 cursor-default'}`}
+      className={`${text ? 'text-gray-800 hover:text-gray-900 cursor-pointer' : 'text-gray-400 cursor-default'} `}
       onClick={handleClick}
     >
       <HiOutlineHeart />

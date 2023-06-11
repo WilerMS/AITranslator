@@ -1,24 +1,76 @@
 import { SUPORTED_LANGUAGES } from '@constants/suportedLanguages'
-import React, { type FC } from 'react'
-import { FaHeart, FaSearch } from 'react-icons/fa'
+import { useDebounce } from '@hooks/useDebounce'
+import React, { useEffect, useMemo, useState, type FC } from 'react'
+import { FaHeart, FaSearch, FaTimes } from 'react-icons/fa'
 import { type Translation } from 'types'
+import { intersection } from 'utils'
 import Logo from './Logo'
 
 interface FavoritesProps {
-  children: JSX.Element | JSX.Element[]
+  translations: Translation[]
 }
 
-const Favorites: FC<FavoritesProps> = ({ children }) => {
+interface FavoriteSearchProps {
+  onSearch: (value: string) => void
+}
+
+const FavoriteSearch: FC<FavoriteSearchProps> = ({
+  onSearch
+}) => {
+  const [isSearching, setIsSearching] = useState(false)
+  const [text, setText] = useState('')
+  const debouncedText = useDebounce(text)
+
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setText(e.currentTarget.value)
+  }
+
+  const handleToggleSearch = () => setIsSearching(!isSearching)
+
+  useEffect(() => {
+    onSearch(debouncedText)
+  }, [debouncedText])
+
+  return (
+    <div className="w-full h-[63px] p-3 flex items-center justify-between font-semibold bg-white rounded-lg">
+      {isSearching
+        ? <input className='outline-none font-normal' placeholder='Search in dictionary...' type="text" value={text} onChange={handleChange} />
+        : <h2 className='text-2xl text-gray-700'>Dictionary</h2>
+      }
+      <button onClick={handleToggleSearch}>
+        {isSearching
+          ? <FaTimes className='text-xl text-gray-700' />
+          : <FaSearch className='text-xl text-gray-700' />
+        }
+      </button>
+    </div>
+  )
+}
+
+const Favorites: FC<FavoritesProps> = ({ translations }) => {
+  const [searchedText, setSearchedText] = useState('')
+
+  const handleSearchFavorite = (value: string) => setSearchedText(value)
+
+  const intersectedTranslations = useMemo(() => {
+    if (searchedText) {
+      const matches = intersection(searchedText, translations)
+      return matches
+    }
+    return translations
+  }, [searchedText])
+
   return (
     <div className='hidden relative md:max-w-[400px] md:min-w-[400px] md:flex flex-col p-3 gap-3'>
-
-      <div className="w-full h-[63px] p-3 flex items-center justify-between font-semibold bg-white rounded-lg">
-        <h2 className='text-2xl text-gray-700'>Dictionary</h2>
-        <FaSearch className='text-xl text-gray-700' />
-      </div>
+      <FavoriteSearch onSearch={handleSearchFavorite} />
 
       <div className='p-3 bg-white h-full rounded-lg flex flex-col gap-3 overflow-y-scroll scrollbar-hide md:pb-24'>
-        {children}
+        {intersectedTranslations.map((translation) => (
+          <FavoriteItem
+            key={translation.fromText}
+            {...translation}
+          />
+        ))}
       </div>
 
       <Logo className='absolute bottom-0 mb-2 z-50' />

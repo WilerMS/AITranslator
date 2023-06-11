@@ -91,14 +91,9 @@ export default function App () {
       <div className='bg-gray-50 w-full h-full overflow-hidden md:max-h-[800px] md:max-w-[1000px] md:shadow-xl md:rounded-lg md:flex'>
 
         <div className='w-full h-full md:flex'>
-          <Favorites>
-            {favTranslations.map((translation) => (
-              <FavoriteItem
-                key={translation.fromText}
-                {...translation}
-              />
-            ))}
-          </Favorites>
+          <Favorites
+            translations={favTranslations}
+          />
 
           <div className='flex gap-3 flex-col p-3 md:pl-0 h-full w-full'>
             <Logo className='md:hidden' />
