@@ -20,8 +20,6 @@
 ## Description
 This app translates text between many languages. It's able to recognize images and audios, and offers you a set of tools to interact with translated texts.
 
-You can see a demo here: [clipborad by Wiler Mariñez](https://www.youtube.com/watch?v=KmyHG7ZwuOI)
-
 ## Installation guide
 
 In this repository we have two projects, one for the web client and another one to deploy a python server which serves an API REST.
@@ -58,4 +56,4 @@ API_HOST=<server_url_here>
 npm run dev
 ```
 > It will run the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
