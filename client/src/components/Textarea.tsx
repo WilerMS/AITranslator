@@ -1,8 +1,4 @@
-import { useLocalStorage } from '@hooks/useLocalStorage'
 import { useEffect, type FC } from 'react'
-import { type Language } from 'types'
-import CopyToClipboard from './CopyToClipboard'
-import TextToSpeech from './TextToSpeech'
 
 interface Props {
   isFromText?: boolean
