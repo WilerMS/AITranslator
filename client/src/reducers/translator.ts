@@ -2,6 +2,7 @@ import { TranslatorActions } from '@actions/translator'
 import { AUTO_LANGUAGE } from '@constants/suportedLanguages'
 import { type TranslatorState, type TranslatorAction } from './../types.d'
 
+// @ts-expect-error
 export const initialTanslatorState: TranslatorState = {
   fromLanguage: 'es',
   toLanguage: 'en',

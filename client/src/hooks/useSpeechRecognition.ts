@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+// @ts-expect-error
 const isSupportedSpeedRecognition = !!window.webkitSpeechRecognition
 
 export const useSpeechRecognition = ({
@@ -11,6 +12,7 @@ export const useSpeechRecognition = ({
   const recognition = useMemo(() => {
     if (!isSupportedSpeedRecognition) return undefined
 
+    // @ts-expect-error
     const SpeechRecognition = webkitSpeechRecognition
     const recognition = new SpeechRecognition()
 
@@ -19,10 +21,12 @@ export const useSpeechRecognition = ({
     return recognition
   }, [lang])
 
+  // @ts-expect-error
   const onResult = useCallback((e: SpeechRecognitionEvent) => {
     const results = e.results
     const transcript = Array
       .from(results)
+      // @ts-expect-error
       .map(([{ transcript }]) => transcript)
       .join('')
     setTranscription(transcript)

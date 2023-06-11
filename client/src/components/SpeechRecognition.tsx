@@ -6,6 +6,7 @@ interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
 
 }
 
+// @ts-expect-error
 const isSupportedSpeedRecognition = !!window.webkitSpeechRecognition
 
 const Dictaphone: FC<Props> = (props) => {
