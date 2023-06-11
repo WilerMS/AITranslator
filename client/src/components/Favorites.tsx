@@ -90,10 +90,12 @@ export const FavoriteItem: FC<Translation> = ({ id, fromLanguage, fromText, resu
   return (
     <div className='relative w-full border border-gray-100 rounded-lg'>
       <div className='p-3 border-b border-gray-100'>
+        {/* @ts-expect-error */}
         <h3 className='text-xl font-semibold'>{SUPORTED_LANGUAGES[fromLanguage].flag} {SUPORTED_LANGUAGES[fromLanguage].name}</h3>
         <span className='block mt-1 text-gray-600 overflow-hidden truncate text-ellipsis'>{fromText}</span>
       </div>
       <div className='p-3'>
+        {/* @ts-expect-error */}
         <h3 className='text-xl font-semibold'>{SUPORTED_LANGUAGES[toLanguage].flag} {SUPORTED_LANGUAGES[toLanguage].name}</h3>
         <span className='block mt-1 text-gray-600 overflow-hidden truncate text-ellipsis'>{result}</span>
       </div>
