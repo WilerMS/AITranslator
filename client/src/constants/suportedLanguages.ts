@@ -7,7 +7,8 @@ export const SUPORTED_LANGUAGES = {
   jp: { name: 'Japanese', flag: '🇯🇵', slang: 'ja_JP' },
   ko: { name: 'Korean', flag: '🇰🇷', slang: 'ko_KR' },
   zh_CN: { name: 'Chinese CN', flag: '🇨🇳', slang: 'zh_CN' },
-  zh_TW: { name: 'Chinese TW', flag: '🇨🇳', slang: 'zh_TW' }
+  zh_TW: { name: 'Chinese TW', flag: '🇨🇳', slang: 'zh_TW' },
+  mx: {name: 'Mexican ES'}
 }
 
 export const AUTO_LANGUAGE = 'auto'
