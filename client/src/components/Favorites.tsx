@@ -76,10 +76,10 @@ const Favorites: FC<FavoritesProps> = ({ translations, onClose = () => {}, show 
 
       )}
     >
-      <div className='bg-white flex items-center'>
+      <div className='bg-white rounded-lg flex items-center'>
         <button
           onClick={onClose}
-          className='h-full bg-white text-4xl'
+          className='md:hidden h-full bg-white text-4xl'
         >
           <MdChevronLeft />
         </button>
