@@ -24,6 +24,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
     'n/no-callback-literal': 'off',
-    'no-useless-return': 'off'
+    'no-useless-return': 'off',
+    '@typescript-eslint/no-confusing-void-expression': 'off'
   }
 }

@@ -4,12 +4,17 @@ import { useTranslatorContext } from 'context/translator'
 import React, { useEffect, useMemo, useState, type FC } from 'react'
 import { CgTrashEmpty } from 'react-icons/cg'
 import { FaHeart, FaSearch, FaTimes, FaTrash } from 'react-icons/fa'
+import { MdChevronLeft } from 'react-icons/md'
+
 import { type Translation } from 'types'
 import { intersection } from 'utils'
 import Logo from './Logo'
+import cn from 'classnames'
 
 interface FavoritesProps {
   translations: Translation[]
+  onClose: () => void
+  show?: boolean
 }
 
 interface FavoriteSearchProps {
@@ -27,7 +32,7 @@ const FavoriteSearch: FC<FavoriteSearchProps> = ({
     setText(e.currentTarget.value)
   }
 
-  const handleToggleSearch = () => setIsSearching(!isSearching)
+  const handleToggleSearch = () => { setIsSearching(!isSearching) }
 
   useEffect(() => {
     onSearch(debouncedText)
@@ -49,10 +54,10 @@ const FavoriteSearch: FC<FavoriteSearchProps> = ({
   )
 }
 
-const Favorites: FC<FavoritesProps> = ({ translations }) => {
+const Favorites: FC<FavoritesProps> = ({ translations, onClose = () => {}, show = true }) => {
   const [searchedText, setSearchedText] = useState('')
 
-  const handleSearchFavorite = (value: string) => setSearchedText(value)
+  const handleSearchFavorite = (value: string) => { setSearchedText(value) }
 
   const intersectedTranslations = useMemo(() => {
     if (searchedText) {
@@ -62,8 +67,24 @@ const Favorites: FC<FavoritesProps> = ({ translations }) => {
   }, [searchedText, translations])
 
   return (
-    <div className='hidden relative md:max-w-[400px] md:min-w-[400px] md:flex flex-col p-3 gap-3'>
-      <FavoriteSearch onSearch={handleSearchFavorite} />
+    <div
+      className={cn(
+        show ? 'right-0' : 'right-[100%]',
+        'transition-all',
+        'absolute w-full h-full z-[99] ',
+        'md:right-0 md:relative md:max-w-[400px] md:min-w-[400px] md:flex flex-col p-3 gap-3'
+
+      )}
+    >
+      <div className='bg-white flex items-center'>
+        <button
+          onClick={onClose}
+          className='h-full bg-white text-4xl'
+        >
+          <MdChevronLeft />
+        </button>
+        <FavoriteSearch onSearch={handleSearchFavorite} />
+      </div>
 
       <div className='p-3 bg-white h-full rounded-lg flex flex-col gap-3 overflow-y-scroll scrollbar-hide md:pb-24'>
         {intersectedTranslations.map((translation) => (

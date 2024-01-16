@@ -3,7 +3,7 @@ import { useTranslatorStore } from '@hooks/useTranslatorStore'
 import { LanguageSelector } from '@components/LanguageSelector'
 import { AUTO_LANGUAGE, SUPORTED_LANGUAGES } from '@constants/suportedLanguages'
 import { Textarea } from '@components/Textarea'
-import { useEffect, useId } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { useDebounce } from '@hooks/useDebounce'
 import { translate } from 'service/translator'
 import ActionButton from '@components/ActionButton'
@@ -30,6 +30,7 @@ export default function App () {
     setFromText,
     setResult
   } = useTranslatorStore()
+  const [showFavorites, setShowFavorites] = useState(false)
 
   const debouncedText = useDebounce(fromText)
 
@@ -42,9 +43,7 @@ export default function App () {
     const to = SUPORTED_LANGUAGES[toLanguage]?.name
 
     translate(debouncedText, from, to)
-      .then((result) => {
-        setResult(result)
-      })
+      .then(setResult)
       .catch((e) => {
         setResult('Error...!')
       })
@@ -93,6 +92,8 @@ export default function App () {
         <div className='w-full h-full md:flex'>
           <Favorites
             translations={favTranslations}
+            onClose={() => setShowFavorites(false)}
+            show={showFavorites}
           />
 
           <div className='flex gap-3 flex-col p-3 md:pl-0 h-full w-full'>
@@ -141,7 +142,9 @@ export default function App () {
               </div>
             </div>
             <div className='relative w-full h-1/3 rounded-lg flex items-center justify-center gap-5'>
-              <button className='text-cyan-600 bg-white rounded-full z-40 shadow-xl p-3 text-2xl transition hover:scale-105 active:scale-95'>
+              <button
+                onClick={() => setShowFavorites(true)}
+                className='text-cyan-600 bg-white rounded-full z-40 shadow-xl p-3 text-2xl transition hover:scale-105 active:scale-95'>
                 <HiMenuAlt2 />
               </button>
               <Dictaphone
