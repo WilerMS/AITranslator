@@ -55,5 +55,9 @@ API_HOST=<server_url_here>
 ```bash 
 npm run dev
 ```
+or
+```
+npm start
+```
 > It will run the app in development mode.\
 Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
